@@ -13,3 +13,5 @@ templates/tempPDF/
 __pycache__/
 
 .DS_Store
+
+documents.zip
