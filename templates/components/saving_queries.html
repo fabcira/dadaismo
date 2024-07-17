@@ -1,0 +1,26 @@
+{#interface to save the queries and their answers#}
+    <div class="container-fluid" id="saved_queries_div" style="display:none;">
+        <h1>Saved Queries</h1>
+        <div class="w-100" id="saved_queries_content"></div>
+    </div>
+
+    <div class="container" id="retrieve_documents" style="display:none;">
+        <h1>Retrieve Documents</h1>
+        <form id="retrieveForm">
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <textarea class="form-control" id="question" rows="4" name="question" required></textarea>
+            </div>
+            <div type="button" class="btn btn-primary" id="submit_query" onclick="retrieveDocuments()">Submit</div>
+        </form>
+        <div class="mt-4">
+            <h2>Results</h2>
+            <div id="search_engine_response"></div>
+            <table class="table" id="resultsTable">
+                <tbody>
+                <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

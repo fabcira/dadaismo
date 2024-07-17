@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dada-Ismo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
+
+    <script src="{{ url_for('static', filename='javascripts/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/one_doc.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/retrieve_docs.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/pdf_viewer.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/saved_queries.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+
+</head>
+<body onload="init_async();">
+ {% include 'components/navbar.html' %}
+
+<div class="container-fluid d-flex flex-column align-items-center justify-content-center p-0" id="main-container">
+    {#    front page#}
+    {% include 'components/front_page.html' %}
+    {#    querying a single doc#}
+    {% include 'components/catalogue_browsing.html' %}
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+.idea/PDF Selection.iml
+
+.idea/
+
+documents/
+
+venv/
+
+
+templates/tempPDF/
+
+__pycache__/
+
+.DS_Store

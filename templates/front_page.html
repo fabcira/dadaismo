@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dada-Ismo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
+
+    <script src="{{ url_for('static', filename='javascripts/one_doc.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/index.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='javascripts/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/retrieve_docs.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/pdf_viewer.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/saved_queries.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+
+</head>
+<body>
+{% include 'components/navbar.html' %}
+<div id="main_page_container" class="container-fluid custom-margin">
+    <div class="row flex-grow-1 d-flex flex-column" style="height: 100vh">
+        <div class="tab-content w-100" id="tab-panel">
+            <div class="row">
+                <div class="container text-center col-md-4">
+                    <img src="{{ url_for('static', filename='imgs/catalogo_main.jpg') }}"
+                         alt="a decoration taken from the Paravia catalogue" class="img-fluid mx-auto d-block">
+                </div>
+                <div class="col-md-8">
+                    <h1 class="mt-2">Dada-Ismo</h1>
+                    <p>Questo è un sistema per accedere ai cataloghi della Dada in modo da permettere di:</p>
+                    <ul>
+                        <li><a href="/one_doc">Esplorare i documenti cataloghi</a></li>
+                        <li><a href="/multiple_docs">Cercare nei cataloghi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

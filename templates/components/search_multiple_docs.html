@@ -1,0 +1,92 @@
+{#interfqce to query all documents#}
+<div id="document_retriever_container" class="justify-content-center container-fluid full-height
+            d-flex flex-column  mx-auto" style="max-width: 95%; display:none;">
+     <div class="row third-height center-content">
+        <div class="mt-1">
+            Inserisci una domanda molto precisa e circostanziata. Per esempio: <br/>
+            <i class="indented">"Descrivimi i doni froebelliani citando separatamente l'informazione da ciascun
+                catalogo.
+                Sii preciso ed esaustivo"</i>
+            <button class="btn btn-outline-custom p-0 ml-1" onclick="insertExample()">Prova questo esempio!</button>
+
+            <div id="chat-container" class="chat-container my-1">
+                <div>
+                    <div class="input-group">
+                        <label for="chat-input"></label>
+                        <textarea class="form-control" id="chat-input" rows="3" required></textarea>
+                        <div class="input-group-append" id="button-container">
+                            <button id="send_button" class="btn btn-custom" type="button">Cerca
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="summary_container" class="chat-container  third-height mt-2" style="display:none;">
+        <div class="row">
+            <div class="chat-container col-md-6">
+                <h3 class="dark_row">Risposta</h3>
+                Questa è la risposta del sistema:
+            </div>
+            <div class="chat-container col-md-6">
+                <h3 class="dark_row">Lista Documenti Trovati</h3>
+                <div class="d-flex align-items-center mt-4">
+                    <label for="sortDropdown" class="mr-2 mb-0">Ordina I documenti per:</label>
+                    <select id="sortDropdown" class="form-control w-auto" onchange="displayDocumentsBy(this.value)">
+                        <option value="relevance">Rilevanza</option>
+                        <option value="year">Data</option>
+                        <option value="title">Titolo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div id="response" class="chat-container col-md-6  "></div>
+            <div class="chat-container col-md-6">
+                <!-- Tab panes -->
+                <div class="row">
+                    <!-- Summary  -->
+                    <div class="w-100" id="summary">
+                        <div id="summary_container_inner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="save_button" class="btn btn-outline-custom" type="button"
+                onclick="promptForNote()" style="display:none;">Salva Risultati
+        </button>
+    </div>
+
+
+    <div class="chat-container  third-height mt-5" id="lower_panel" style="display:none;">
+        <div class="row">
+            <!-- Documents snippets  -->
+            <div class="col-md-6 ">
+                <h3 class="dark_row">Brani Rilevanti</h3>
+            </div>
+            <!-- PDF Viewer  -->
+            <div class="col-md-6  ">
+                <h3 class="dark_row">Documento Originale</h3>
+                Clicca sul numero di pagina per aprire il documento
+
+            </div>
+        </div>
+        <div class="row">
+            <!-- Documents snippets  -->
+            <div class=" col-md-6 ">
+                <div id="documents_container"></div>
+            </div>
+            <!-- PDF Viewer  -->
+            <div class="col-md-6  " id="limited_pdf_viewer_container" style="height: 100vh;">
+                <!-- PDF viewer content goes here -->
+                <div id="limited_pdf_viewer"></div>
+                <div id="controls">
+                    <button id="prev-page">Previous Page</button>
+                    <button id="next-page">Next Page</button>
+                    <div style="display: none">Page: <span id="page-number"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

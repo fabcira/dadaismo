@@ -1,0 +1,63 @@
+
+
+.chat-container {
+    width: 100%;
+    max-width: 100%;
+    background: #ffffff;
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 5px;*/
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensure padding is included in the element's width and height */
+}
+
+.chat-history {
+    max-height: calc(100vh - 160px); /* Adjust based on the header, footer, and padding height */
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.chat-message {
+    padding: 10px;
+    border-radius: 10px;
+    border-color: rgb(110, 72, 48);;
+    margin-bottom: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.chat-message.user {
+    background-color: #d3d3d3;
+    align-self: flex-end;
+    text-align: right;
+}
+
+.chat-message.remote {
+    background-color: #ffffff;
+    align-self: flex-start;
+    text-align: left;
+}
+
+.input-group textarea {
+    resize: none;
+}
+
+ table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .container > div {
+            width: 100%;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }

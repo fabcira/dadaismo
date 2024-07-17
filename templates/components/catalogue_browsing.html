@@ -1,0 +1,20 @@
+{# the querying odf a single pdf #}
+<div id="chat_and_viewer_container" class="container-fluid p-0" style="display:none;">
+    {#        <h1 class="text-center custom-heading p-0">Dada-ISMO</h1>#}
+    <div class="row flex-grow-1 d-flex flex-column" style="height: 100vh">
+        <div class="tab-content w-100" id="tab-panel">
+            <div class="tab-pane fade show active " id="pdf" role="tabpanel" aria-labelledby="pdf-tab">
+                <div id="pdf-viewer" class="overflow-auto mt-0" style="height: 90vh;"></div>
+                <div id="page-selection" class="mt-2" style="overflow: auto; display:none">
+                    <label for="start-page">Start Page:</label>
+                    <input type="number" id="start-page" min="0">
+                    <label for="end-page">End Page:</label>
+                    <input type="number" id="end-page" min="0">
+                    <button class="btn btn-primary" onclick="viewCurrentPdf()">Preview</button>
+                    <button class="btn btn-outline-warning" onclick="resetPages()">Reset</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

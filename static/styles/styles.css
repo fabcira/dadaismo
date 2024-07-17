@@ -1,0 +1,292 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.third-height {
+    flex: 1; /* This will ensure each div takes equal height within the parent */
+}
+
+.inline-block {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar-red {
+    background-color: rgb(110, 72, 48);
+}
+
+.navbar-red .navbar-brand,
+.navbar-red .nav-link {
+    color: white !important;
+}
+
+
+.pdf-item {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
+
+
+#response {
+    max-height: calc(1.5em * 15); /* 15 lines with line height of 1.5em */
+    line-height: 1.5em;
+    overflow-y: auto; /* Add a vertical scrollbar if content exceeds max height */
+}
+
+
+#catalogue_display img {
+    max-height: 700px; /* Ensures the image is responsive */
+    width: auto; /* Maintains the aspect ratio */
+    height: 400px; /* Sets a specific width for the image */
+}
+
+.custom-heading {
+    background-color: darkred;
+    color: white;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.padded {
+    padding: 10px;
+}
+
+#chat-container {
+    height: 100%;
+}
+
+#pdf-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Viewport height */
+}
+
+#pdf-viewer {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#page-selection {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+#chat_and_viewer_container,
+#chat_and_viewer_container > * {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.d-flex {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.btn-outline-custom {
+            color: rgb(110, 72, 48);
+            border: 1px solid rgb(110, 72, 48);
+            background-color: transparent;
+        }
+
+        .btn-outline-custom:hover {
+            color: white;
+            background-color: rgb(110, 72, 48);
+        }
+.link_button {
+    color: rgb(110, 72, 48);;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.line {
+    border: none;
+    border-top: 2px solid black;
+    margin: 0; /* Optional: Add some margin around the line */
+}
+
+.empty_line {
+    border: none;
+    border-top: 1px solid lightgrey;
+    margin: 20px 0; /* Optional: Add some margin around the line */
+}
+
+.indented {
+    padding-left: 2em; /* Adjust this value for your desired left indentation */
+    padding-right: 2em; /* Adjust this value for your desired right indentation */
+}
+
+#pdf-viewer {
+    width: 80%;
+    height: 100vh;
+    border: 1px solid #ccc;
+    overflow: auto;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#controls {
+    margin: 0 auto;
+}
+
+canvas {
+    padding: 10px;
+    display: block;
+    /*width: 100%; !* Ensure the canvas takes the full width *!*/
+    height: 90%; /* Ensure the canvas takes nearly the full height */
+    max-width: 100%; /* Ensure the canvas doesn't overflow the container */
+    max-height: 100%; /* Ensure the canvas doesn't overflow the container */
+}
+
+#page-num {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#limited_pdf_viewer_container {
+    height: 100vh; /* Ensures the container takes full viewport height */
+}
+
+
+#limited_pdf_viewer {
+    width: 100%; /* Adjust as necessary */
+    height: 120%; /* Adjust as necessary */
+    border: 1px solid #000; /* Just for visual aid */
+}
+
+#summary {
+    max-height: calc(1.5em * 15); /* 15 lines with line height of 1.5em */
+    line-height: 1.5em;
+    overflow-y: auto; /* Add a vertical scrollbar if content exceeds max height */
+}
+
+/* Spinner styles */
+
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.2em;
+}
+
+.scrollable-list {
+    overflow-y: auto;
+    position: relative;
+}
+
+/*summary container has last element faded so to show there are other elements*/
+
+.scrollable-list::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(211, 211, 211, 1)); /* Transparent to light gray */
+    pointer-events: none;
+}
+
+
+/*session css*/
+.session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.session-link {
+    text-decoration: none;
+    color: blue;
+}
+
+.session-column {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.session-button {
+    flex: 0 0 auto;
+}
+
+.input-group {
+    display: flex;
+    align-items: stretch; /* Ensure elements stretch to the same height */
+}
+
+.input-group textarea {
+    flex: 1;
+    height: auto; /* Ensure the textarea resizes properly */
+}
+
+.input-group-append {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure buttons take available space */
+}
+
+.input-group-append .btn {
+    width: 100%;
+    flex: 1; /* Make the buttons take the available vertical space */
+    margin: 5px 0;
+}
+
+#page-selection {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    text-align: center;
+}
+
+.custom-margin {
+    margin: 2rem !important; /* Adjust this value as needed */
+}
+
+.btn-custom {
+    background-color: rgb(110, 72, 48);
+    border-color: rgb(110, 72, 48);
+    color: white; /* Adjust text color if needed */
+}
+
+.btn-custom:hover {
+    background-color: rgb(130, 92, 68); /* Optional: Darker shade for hover */
+    border-color: rgb(130, 92, 68);
+}
+
+a {
+    color: rgb(110, 72, 48);
+}
+
+/* Change the color of links when hovered over */
+a:hover {
+    color: rgb(130, 92, 68); /* Optional: Darker shade for hover */
+}
+
+/* Change the color of visited links */
+a:visited {
+    color: rgb(110, 72, 48);
+}
+
+/* Change the color of active links */
+a:active {
+    color: rgb(90, 52, 28); /* Optional: Darker shade for active state */
+}
+
+.no-border {
+            border: none !important;
+        }
+
+.dark_row {
+    background-color: rgb(110, 72, 48);
+    color: white;
+}
