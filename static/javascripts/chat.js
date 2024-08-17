@@ -4,6 +4,7 @@ let tablesContainer;
 let linkList;
 let currentSelection = 'relevance'
 let currentResponse = "";
+let currentFilter = "";
 
 function formatMetadata(metadata) {
     let atring = // metadata['author']+" " +
@@ -524,6 +525,11 @@ function insertExample(){
 function insertResponse(response){
     let responseDiv = document.getElementById('response')
     responseDiv.innerText = response;
+}
+
+function insertFilter(filter){
+    let filterDiv= document.getElementById('final-logical-formula')
+    filterDiv.innerText = filter;
 }
 
 

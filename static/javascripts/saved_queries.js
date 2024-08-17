@@ -16,7 +16,8 @@ async function fetchSavedQueries() {
 
 function getLinkFromSession(session) {
             return `<div class="session-column">Question: <span style="color: blue;">${session.question}</span></div>
-                    <div class="session-column">Note: ${session.note}</div>`;
+                    <div class="session-filter">Filter: ${session.filter}</div>
+                    <div class="session-column">Note: ${session.note}</div>\``;
         }
 function displaySessions(sessions) {
     const container = document.getElementById('saved_queries_content');
@@ -82,6 +83,8 @@ function displayDocumentsAndQuery(response){
     showResultsPanel();
     insertQuery(response['question'])
     insertResponse(response['response'])
+    insertFilter(response['filter'])
+
     // switchToTab('query_the_catalogue');
     docList = response['documents_list'];
     displayDocList(docList);
@@ -107,6 +110,7 @@ async function saveDocumentsIntoSession(note) {
                 {
                     'question': currentMessage,
                     'response': currentResponse,
+                    'filter': currentCondition,
                     'documents_list': docList,
                     'note': note
                 }

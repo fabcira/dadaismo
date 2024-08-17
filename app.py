@@ -353,6 +353,7 @@ def save_documents():
     documents = data.get('documents_list', [])
     question = data.get('question', 'no question provided')
     response = data.get('response', 'no response provided')
+    filter = data.get('filter', 'no filter')
     note = data.get('note', 'no note provided')
     session_id = request.args.get('session_id', str(uuid.uuid4()))  # Generate a random session ID if not provided
 
@@ -360,6 +361,7 @@ def save_documents():
     redis_client.hmset(session_id, {
         'documents_list': json.dumps(documents),
         'question': question,
+        'filter': filter,
         'response': response,
         'note': note
     })
@@ -376,6 +378,7 @@ def get_sessions():
             session_data = redis_client.hgetall(key)
             print(f"Session data for key {key}: {session_data}")
             query = session_data.get(b'question')
+            filter = session_data.get(b'filter').decode('utf-8')
             note = session_data.get(b'note', b'').decode('utf-8')
 
             if query:
@@ -384,6 +387,7 @@ def get_sessions():
                     sessions.append({
                         'session_id': key.decode('utf-8'),
                         'question': query_decoded,
+                        'filter': filter,
                         'note': note
                     })
         except Exception as e:
@@ -403,6 +407,7 @@ def get_session(session_id):
         'session_id': session_id,
         'documents_list': json.loads(documents),
         'question': session_data.get(b'question', b'').decode('utf-8'),
+        'filter': session_data.get(b'filter', b'').decode('utf-8'),
         'response': session_data.get(b'response', b'').decode('utf-8'),
         'note': session_data.get(b'note', b'').decode('utf-8')
     }), 200

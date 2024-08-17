@@ -87,6 +87,10 @@ function sendMessageFromHTML() {
     sendMessage(current_route, currentMessage, filter).then(r => r);
     document.getElementById('save_button').style.display = 'block';
     document.getElementById('button-container').style.gridTemplateRows = 'auto auto';
+    // hide the pdf in cvase it is showing
+    let doc_viewer = document.getElementById("limited_pdf_viewer_container");
+    doc_viewer.style.display='none';
+
 }
 
 async function init_async() {
