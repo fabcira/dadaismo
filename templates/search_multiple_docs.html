@@ -4,35 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dada-Ismo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- jQuery (if needed by your custom scripts) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
 
+    <!-- Custom JavaScript -->
     <script src="{{ url_for('static', filename='javascripts/index.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/chat.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/retrieve_docs.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/pdf_viewer.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/saved_queries.js') }}"></script>
     <script src="{{ url_for('static', filename='javascripts/search_multiple_docs.js') }}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script src="{{ url_for('static', filename='javascripts/filter.js') }}"></script>
 
 </head>
 <body onload="init_async_multiple();">
 {% include 'components/navbar.html' %}
 
-
 <div class="container-fluid d-flex flex-column align-items-center justify-content-center p-0 mt-2" id="main-container">
-    {#    querying all documents#}
+    {# Querying all documents #}
     {% include 'components/search_multiple_docs.html' %}
 
-    {#    saved queries#}
+    {# Saved queries #}
     {% include 'components/saving_queries.html' %}
+        {# Filter for querying all documents #}
+    {% include 'components/filter_component.html' %}
+
+
 </div>
+
+
+<!-- PDF.js library (optional, if used by your scripts) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+
 </body>
 </html>

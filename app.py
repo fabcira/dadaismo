@@ -178,8 +178,9 @@ def start_chat_on_pdf():
 def generate_chunks(path, current_user_id, current_session_id, question, raw_text, filter):
     with app.app_context():
         try:
+            print("filter:", filter)
             chat_runnable = RemoteRunnable(path,
-                                           cookies={"user_id": current_user_id}, timeout=3000)
+                                           cookies={"user_id": current_user_id}, timeout=20000)
             for chunk in chat_runnable.stream({'question': question, 'context': raw_text, 'filter': filter},
                                               {'configurable': {'conversation_id': current_session_id}}):
 
@@ -216,7 +217,11 @@ def stream_chat():
 
     question = session.get('question')
     raw_text = session.get('raw_text')
+    # @todo remove when filter is real
+    # filter = "lte(\"year\", 1930)"
+    # filter = ""
     filter = session.get('filter')
+    print("filter found:", filter)
 
     response = Response(generate_chunks("http://localhost:8010/query_the_catalogues/",
                                         current_user_id, current_session_id,

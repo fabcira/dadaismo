@@ -5,6 +5,7 @@ var RETRIEVE_DOCUMENTS = 'retrieve_documents'
 let current_route = QUERY_A_DOC
 let resultsAreAvailable = false;
 let currentMessage = "";
+let currentCondition = "";
 
 function initChat() {
     const button = document.getElementById('send_button');
@@ -62,13 +63,21 @@ function initChat() {
  * example:
  * {
  *     "query": "lingua",
- *     "filter": "eq(\"document_name\", \"1982_Paravia_fisica\")"
+ *     "filter": "eq(\"title\", \"1982 Paravia fisica\")"
  * }
+ * the metadata for the catalogues is:
+ * "1979_Paravia_sussidi audiovisivi.pdf": {
+ *       "ext": ".pdf",
+ *       "author": "tbd",
+ *       "title": "Sussidi audiovisivi",
+ *       "publisher": "Paravia",
+ *       "year": "1979 - 1980"
+ *   },
  */
 
 function getFilterConditions() {
-    // @todo to implement
-    return "";
+    currentCondition = document.getElementById('final-logical-formula').textContent
+    return currentCondition;
 }
 
 function sendMessageFromHTML() {

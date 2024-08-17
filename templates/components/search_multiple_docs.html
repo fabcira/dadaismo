@@ -1,7 +1,7 @@
 {#interfqce to query all documents#}
 <div id="document_retriever_container" class="justify-content-center container-fluid full-height
             d-flex flex-column  mx-auto" style="max-width: 95%; display:none;">
-     <div class="row third-height center-content">
+    <div class="row third-height center-content">
         <div class="mt-1">
             Inserisci una domanda molto precisa e circostanziata. Per esempio: <br/>
             <i class="indented">"Descrivimi i doni froebelliani citando separatamente l'informazione da ciascun
@@ -9,6 +9,29 @@
                 Sii preciso ed esaustivo"</i>
             <button class="btn btn-outline-custom p-0 ml-1" onclick="insertExample()">Prova questo esempio!</button>
 
+            <!-- Minimalistic Filter Button and Final Formula Display -->
+            <div class="row">
+                <div class="d-flex align-items-center">
+                    <!-- Filter Button with Icon -->
+                    Puoi anche aggiungere condizioni di ricerca sui cataloghi su date e autori, editori, etc. con questo
+                    bottone &nbsp;
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#filterModal">
+                        <i class="bi bi-filter"></i> <!-- Bootstrap 5 Filter Icon -->
+                    </button>
+                    <!-- Remove Filter Button (initially hidden) -->
+                    <button id="remove-filter-btn" type="button" class="btn btn-outline-danger btn-sm ms-2"
+                            style="display: none;" onclick="removeFilter()">
+                        <i class="bi bi-x-circle"></i> <!-- Bootstrap 5 Close Icon -->
+                        Rimuovi Filtro
+                    </button>
+
+                    <!-- Final Logical Formula Display -->
+                    <div id="final-logical-formula" class="ms-3 p-2 border rounded small text-muted">
+                        <!-- Final formula text will appear here -->
+                    </div>
+                </div>
+            </div>
             <div id="chat-container" class="chat-container my-1">
                 <div>
                     <div class="input-group">
@@ -23,13 +46,14 @@
             </div>
         </div>
     </div>
-    <div id="summary_container" class="chat-container  third-height mt-2" style="display:none;">
+    <div id="summary_container" class="chat-container third-height mt-2" style="display:none;">
         <div class="row">
-            <div class="chat-container col-md-6">
+            <div class="col-md-6">
                 <h3 class="dark_row">Risposta</h3>
-                Questa è la risposta del sistema:
+                <p>Questa è la risposta del sistema:</p>
+                <div id="response" class="chat-container"></div> <!-- Moved here -->
             </div>
-            <div class="chat-container col-md-6">
+            <div class="col-md-6">
                 <h3 class="dark_row">Lista Documenti Trovati</h3>
                 <div class="d-flex align-items-center mt-4">
                     <label for="sortDropdown" class="mr-2 mb-0">Ordina I documenti per:</label>
@@ -39,23 +63,16 @@
                         <option value="title">Titolo</option>
                     </select>
                 </div>
-            </div>
-        </div>
-        <div class="row ">
-            <div id="response" class="chat-container col-md-6  "></div>
-            <div class="chat-container col-md-6">
-                <!-- Tab panes -->
-                <div class="row">
-                    <!-- Summary  -->
-                    <div class="w-100" id="summary">
-                        <div id="summary_container_inner"></div>
-                    </div>
+                <div id="summary" class="w-100 mt-3">
+                    <div id="summary_container_inner"></div> <!-- Moved here -->
                 </div>
             </div>
         </div>
-        <button id="save_button" class="btn btn-outline-custom" type="button"
-                onclick="promptForNote()" style="display:none;">Salva Risultati
-        </button>
+        <div class="row">
+            <button id="save_button" class="btn btn-outline-custom" type="button"
+                    onclick="promptForNote()" style="display:none;">Salva Risultati
+            </button>
+        </div>
     </div>
 
 
