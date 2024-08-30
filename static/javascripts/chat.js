@@ -140,7 +140,12 @@ function sortDocList(currentSelection, docList) {
         docList.sort((a, b) => {
             const fieldA = a.metadata[currentSelection] || '';
             const fieldB = b.metadata[currentSelection] || '';
-            return fieldA.localeCompare(fieldB);
+            // Assuming that fieldA and fieldB are numbers or can be compared numerically
+            if (typeof fieldA === 'number' && typeof fieldB === 'number') {
+                return fieldA - fieldB;  // Numeric comparison
+            } else {
+                return String(fieldA).localeCompare(String(fieldB));  // Fallback to string comparison
+            }
         });
     }
     return docList;
