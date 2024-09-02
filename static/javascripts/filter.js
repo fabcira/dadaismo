@@ -14,7 +14,7 @@ function addFilter() {
     if (field === 'year') {
         value = Number(value);
         if (isNaN(value)) {
-            alert("Please enter a valid number for the year.");
+            alert("Inserisci un numero di anno valido.");
             return;
         }
     } else {
@@ -32,7 +32,7 @@ function addFilter() {
 
     // Ensure logical operators separate conditions in the current group
     if (currentGroup.length > 0 && !isLogicalOperator(currentGroup[currentGroup.length - 1])) {
-        alert("Please add a logical operator (AND, OR, NOT) before adding another condition.");
+        alert("Per favore aggiungi una condizione logica (AND, OR, NOT) prima di aggiungere un'altra condizione");
         return;
     }
 
@@ -48,12 +48,12 @@ function addFilter() {
  */
 function addLogical(logicalOperator) {
     if (currentGroup.length === 0 && expression.length === 0) {
-        alert("Please add a filter before adding a logical operator.");
+        alert("Aggiungi un filtro prima dell'operatore logico.");
         return;
     }
 
     if (currentGroup.length === 0 && expression.length > 0) {
-        alert("You can't add a logical operator without a condition.");
+        alert("Devi aggiungere almeno una condizione logica o cancellare");
         return;
     }
 
@@ -147,7 +147,7 @@ function confirmFilter() {
     }
 
     if (expression.length === 0) {
-        alert("Please add at least one filter condition.");
+        alert("Aggiungi almeno una condizione o seleziona Cancella");
         return;
     }
 
@@ -204,7 +204,7 @@ function confirmFilter() {
     }
 
     if (expression.length === 0) {
-        alert("Please add at least one filter condition.");
+        alert("Aggiungi almeno una condizione o scegli Cancella.");
         return;
     }
 

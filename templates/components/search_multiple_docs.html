@@ -1,6 +1,11 @@
 {#interfqce to query all documents#}
 <div id="document_retriever_container" class="justify-content-center container-fluid full-height
             d-flex flex-column  mx-auto" style="max-width: 95%; display:none;">
+    {% if generate_answer == "none" %}
+        <h1>Cerca nei Documenti</h1>
+            {% else %}
+                <h1>Domanda al Sist§ema</h1>
+            {% endif %}
     <div class="row third-height center-content">
         <div class="mt-1">
             Inserisci una domanda molto precisa e circostanziata. Per esempio: <br/>
@@ -13,11 +18,11 @@
             <div class="row" id="element_with_indent_issue">
                 <div class="d-flex" style="justify-content: flex-start; margin-left:10px !important;">
                     <!-- Filter Button with Icon -->
-                    Puoi anche aggiungere condizioni di ricerca sui cataloghi su date e autori, editori, etc. con questo
-                    bottone &nbsp;
+                    Per aggiungere condizioni di ricerca sui cataloghi su date e autori, editori, etc.  &nbsp;
                     <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                             data-bs-target="#filterModal">
-                        <i class="bi bi-filter"></i> <!-- Bootstrap 5 Filter Icon -->
+                        Clicca qui!
+{#                        <i class="bi bi-filter"></i> <!-- Bootstrap 5 Filter Icon -->#}
                     </button>
                     <!-- Remove Filter Button (initially hidden) -->
                     <button id="remove-filter-btn" type="button" class="btn btn-outline-danger btn-sm ms-2"

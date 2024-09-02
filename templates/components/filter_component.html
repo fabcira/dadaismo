@@ -35,10 +35,10 @@
                             <label for="value-input">Value</label>
                             <input type="text" class="form-control" id="value-input" placeholder="Enter value">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="addFilter()">Add Filter</button>
+                        <button type="button" class="btn btn-primary" onclick="addFilter()">Inserisci Filtro</button>
                     </form>
-
-                    <h3>Logical Operations</h3>
+                    <br/>
+                    <h3>Operazioni Logiche</h3>
                     <button type="button" class="btn btn-secondary" onclick="addLogical('and')">AND</button>
                     <button type="button" class="btn btn-secondary" onclick="addLogical('or')">OR</button>
                     <button type="button" class="btn btn-secondary" onclick="addLogical('not')">NOT</button>
@@ -48,8 +48,8 @@
                     <pre id="generated-expression" class="border p-3"></pre>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="confirmFilter()">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmFilter()">Filtro Completo</button>
                 </div>
             </div>
         </div>
