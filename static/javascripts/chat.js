@@ -243,10 +243,11 @@ function createDocumentDisplayElements() {
     }
 }
 
-function showResultsPanel() {
+function showResultsPanel(showAlsoResponse) {
     // show the panels
     document.getElementById('lower_panel').style.display = 'block';
     document.getElementById('summary_container').style.display = 'block';
+    document.getElementById('generated_answer_div').style.display = (showAlsoResponse)?'block':'none';
 }
 
 function hideResultsPanel() {
@@ -381,7 +382,7 @@ async function sendMessage(route, message, filter) {
                     try {
                         chunk = JSON.parse(chunk);
                         if (chunk['documents']) {
-                            showResultsPanel();
+                            showResultsPanel(generate_answer);
                             docList = chunk['documents'];
                             displayDocList(docList);
                         } else if (chunk['answer'] && chunk['answer'] !== "") {

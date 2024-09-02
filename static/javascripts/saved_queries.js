@@ -80,7 +80,7 @@ async function getSession(session = null) {
  */
 function displayDocumentsAndQuery(response){
     displayTab('document_retriever_container', QUERY_CATALOGUES, response['response']);
-    showResultsPanel();
+    showResultsPanel(response['response']!=="");
     insertQuery(response['question'])
     insertResponse(response['response'])
     insertFilter(response['filter'])
