@@ -1,22 +1,18 @@
+import json
+import os
+import random
 import shutil
 import sys
 import uuid
-import random
-import json
 
-import httpx
-from flask import Flask, request, Response, jsonify, session
-import json
-from flask_session import Session
 import redis
-
-from flask import Flask, request, send_from_directory, jsonify, render_template, Response
 from PyPDF2 import PdfReader, PdfWriter
+from flask import Flask, request, send_from_directory, jsonify, render_template, Response
+from flask import session
+from flask_session import Session
 from langserve import RemoteRunnable
 
 import utils.scan_documents as scan_docs
-import os
-import requests
 
 # modify the base path so to be able to  import the modules from ICOS
 # Assuming 'PDF Selection' and 'ICOS' are subfolders of 'LLMs'
@@ -87,7 +83,9 @@ def index():
 
 @app.route('/multiple_docs')
 def multiple_docs():
-    return render_template('search_multiple_docs.html')
+    # Capture the value of 'generate_answer' from the query parameters
+    generate_answer = request.args.get('generate_answer', 'none')
+    return render_template('search_multiple_docs.html', generate_answer=generate_answer)
 
 
 @app.route('/one_doc')
@@ -175,13 +173,14 @@ def start_chat_on_pdf():
     return jsonify({'status': 'ok'})
 
 
-def generate_chunks(path, current_user_id, current_session_id, question, raw_text, filter):
+def generate_chunks(path, current_user_id, current_session_id, question, raw_text, filter, generate_answer):
     with app.app_context():
         try:
             print("filter:", filter)
             chat_runnable = RemoteRunnable(path,
                                            cookies={"user_id": current_user_id}, timeout=20000)
-            for chunk in chat_runnable.stream({'question': question, 'context': raw_text, 'filter': filter},
+            for chunk in chat_runnable.stream({'question': question, 'context': raw_text, 'filter': filter,
+                                               'generate_answer': generate_answer},
                                               {'configurable': {'conversation_id': current_session_id}}):
 
                 # print(chunk)
@@ -221,11 +220,17 @@ def stream_chat():
     # filter = "lte(\"year\", 1930)"
     # filter = ""
     filter = session.get('filter')
+    generate_answer = session.get('generate_answer')
+    if generate_answer is None:
+        generate_answer = request.args.get('generate_answer')
+         # it is a JS string (e.g. 'false')  so convert it to boolean
+    generate_answer = generate_answer.lower() == 'true'
+
     print("filter found:", filter)
 
     response = Response(generate_chunks("http://localhost:8010/query_the_catalogues/",
                                         current_user_id, current_session_id,
-                                        question, raw_text, filter),
+                                        question, raw_text, filter, generate_answer),
                         mimetype='text/event-stream')
     return response
 
@@ -244,7 +249,7 @@ def process_with_context():
 
     result = Response(generate_chunks("http://localhost:8010/query_a_doc/",
                                       current_user_id, current_session_id,
-                                      question, raw_text, filter)
+                                      question, raw_text, filter, True)
                       , mimetype='text/event-stream')
     return result
 

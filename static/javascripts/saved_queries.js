@@ -79,7 +79,7 @@ async function getSession(session = null) {
  *                                 }
  */
 function displayDocumentsAndQuery(response){
-    displayTab('document_retriever_container', QUERY_CATALOGUES);
+    displayTab('document_retriever_container', QUERY_CATALOGUES, response['response']);
     showResultsPanel();
     insertQuery(response['question'])
     insertResponse(response['response'])

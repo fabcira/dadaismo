@@ -48,60 +48,66 @@
     </div>
     <div id="summary_container" class="chat-container third-height mt-2" style="display:none;">
         <div class="row">
-            <div class="col-md-6">
+            {#  if we want to generate the answers we have 2 m-6 columns, otherwise we have a m-12 column #}
+            <div class="col-md-6" id="generated_answer_div" style="display: {{ generate_answer }}">
                 <h3 class="dark_row">Risposta</h3>
-                <p>Questa è la risposta del sistema:</p>
+                <p id="">Questa è la risposta del sistema:</p>
                 <div id="response" class="chat-container"></div> <!-- Moved here -->
             </div>
-            <div class="col-md-6">
-                <h3 class="dark_row">Lista Documenti Trovati</h3>
-                <div class="d-flex align-items-center mt-4">
-                    <label for="sortDropdown" class="mr-2 mb-0">Ordina I documenti per:</label>
-                    <select id="sortDropdown" class="form-control w-auto" onchange="displayDocumentsBy(this.value)">
-                        <option value="relevance">Rilevanza</option>
-                        <option value="year">Data</option>
-                        <option value="title">Titolo</option>
-                    </select>
+            {% if generate_answer == "none" %}
+                <div class="col-md-12">
+            {% else %}
+                <div class="col-md-6">
+            {% endif %}
+            <h3 class="dark_row">Lista Documenti Trovati</h3>
+            <div class="d-flex align-items-center mt-4">
+                <label for="sortDropdown" class="mr-2 mb-0">Ordina I documenti per:</label>
+                <select id="sortDropdown" class="form-control w-auto" onchange="displayDocumentsBy(this.value)">
+                    <option value="relevance">Rilevanza</option>
+                    <option value="year">Data</option>
+                    <option value="title">Titolo</option>
+                </select>
+            </div>
+            <div id="summary" class="w-100 mt-3">
+                <div id="summary_container_inner"></div> <!-- Moved here -->
+            </div>
+            </div>
+            <div class="row">
+                <button id="save_button" class="btn btn-outline-custom" type="button"
+                        onclick="promptForNote()" style="display:none;">Salva Risultati
+                </button>
+            </div>
+            </div>
+
+
+            <div class="chat-container  third-height mt-5" id="lower_panel" style="display:none;">
+                <div class="row">
+                    <!-- Documents snippets  -->
+                    <div class="col-md-6 ">
+                        <h3 class="dark_row">Brani Rilevanti</h3>
+                    </div>
+                    <!-- PDF Viewer  -->
+                    <div class="col-md-6  ">
+                        <h3 class="dark_row">Documento Originale</h3>
+                        Clicca sul numero di pagina per aprire il documento (può richiedere qualche momento)
+
+                    </div>
                 </div>
-                <div id="summary" class="w-100 mt-3">
-                    <div id="summary_container_inner"></div> <!-- Moved here -->
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <button id="save_button" class="btn btn-outline-custom" type="button"
-                    onclick="promptForNote()" style="display:none;">Salva Risultati
-            </button>
-        </div>
-    </div>
-
-
-    <div class="chat-container  third-height mt-5" id="lower_panel" style="display:none;">
-        <div class="row">
-            <!-- Documents snippets  -->
-            <div class="col-md-6 ">
-                <h3 class="dark_row">Brani Rilevanti</h3>
-            </div>
-            <!-- PDF Viewer  -->
-            <div class="col-md-6  ">
-                <h3 class="dark_row">Documento Originale</h3>
-                Clicca sul numero di pagina per aprire il documento (può richiedere qualche momento)
-
-            </div>
-        </div>
-        <div class="row">
-            <!-- Documents snippets  -->
-            <div class=" col-md-6 ">
-                <div id="documents_container"></div>
-            </div>
-            <!-- PDF Viewer  -->
-            <div class="col-md-6  " id="limited_pdf_viewer_container" style="height: 100vh;">
-                <!-- PDF viewer content goes here -->
-                <div id="limited_pdf_viewer"></div>
-                <div id="controls">
-                    <button id="prev-page">Previous Page</button>
-                    <button id="next-page">Next Page</button>
-                    <div style="display: none">Page: <span id="page-number"></span></div>
+                <div class="row">
+                    <!-- Documents snippets  -->
+                    <div class=" col-md-6 ">
+                        <div id="documents_container"></div>
+                    </div>
+                    <!-- PDF Viewer  -->
+                    <div class="col-md-6  " id="limited_pdf_viewer_container" style="height: 100vh;">
+                        <!-- PDF viewer content goes here -->
+                        <div id="limited_pdf_viewer"></div>
+                        <div id="controls">
+                            <button id="prev-page">Previous Page</button>
+                            <button id="next-page">Next Page</button>
+                            <div style="display: none">Page: <span id="page-number"></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -257,15 +257,30 @@ function hideResultsPanel() {
         document.getElementById('summary_container').style.display = 'none';
 }
 
+/**
+ * given the system settings (if the generated answer is expected or not, it will tell teh system if to ask the server
+ * to generate the answer
+ * @return {boolean}
+ */
+function getGenerateAnswer() {
+    let generate_answer = false;
+    let generate_answer_id = document.getElementById('generated_answer_div')
+    if (generate_answer_id)
+        generate_answer = generate_answer_id.style.display === 'block'
+    return generate_answer
+}
+
 async function sendMessage(route, message, filter) {
     if (message === '') return;
     hideResultsPanel();
+    let generate_answer = getGenerateAnswer()
     let data = {
         // raw_text: window.raw_text,
         user_id: window.user_id,
         session_id: window.session_id,
         question: message,
-        filter: filter
+        filter: filter,
+        generate_answer: generate_answer
     };
     checkActiveTab()
     if (route === QUERY_A_DOC) {
@@ -292,10 +307,12 @@ async function sendMessage(route, message, filter) {
                 throw new Error('Network response was not ok');
             }
 
+
             data = {
                 user_id: window.user_id,
                 session_id: window.session_id,
-                filter: getFilterConditions()
+                filter: getFilterConditions(),
+                generate_answer: generate_answer
             };
             errorNotified = false
             const params = new URLSearchParams(data);
@@ -368,10 +385,7 @@ async function sendMessage(route, message, filter) {
                             docList = chunk['documents'];
                             displayDocList(docList);
                         } else if (chunk['answer'] && chunk['answer'] !== "") {
-                            if (spinnerVisible) {
-                                hideSpinner()
-                                spinnerVisible = false;
-                            }
+
                             // Use insertAdjacentHTML to directly insert the HTML
                             remoteMessageDiv.insertAdjacentHTML('beforeend', chunk['answer']);
                             remoteMessageDiv.scrollTop = remoteMessageDiv.scrollHeight;
@@ -380,6 +394,9 @@ async function sendMessage(route, message, filter) {
                         // Use insertAdjacentHTML to directly insert the HTML
                         remoteMessageDiv.insertAdjacentHTML('beforeend', chunk['answer']);
                         remoteMessageDiv.scrollTop = remoteMessageDiv.scrollHeight;
+                        hideSpinner()
+                        spinnerVisible = false;
+
                     }
 
                 };
@@ -401,6 +418,9 @@ async function sendMessage(route, message, filter) {
                     // remoteMessageDiv.appendChild(tablesContainer)
                     // displayDocList(tablesContainer, docList);
                     currentResponse = remoteMessageDiv.innerText;
+                    hideSpinner();
+                    spinnerVisible = false;
+
                 };
                 eventSource.onopen = function () {
                     console.log('Connection to server opened.');
@@ -408,7 +428,11 @@ async function sendMessage(route, message, filter) {
                 // Optional: handle the stream ending event
                 eventSource.onend = function (event) {
                     console.log('Stream ended:', event);
+                    currentResponse = remoteMessageDiv.innerText
                     eventSource.close();
+                    hideSpinner();
+                    spinnerVisible = false;
+
                 };
             }
         }).catch(error => {
@@ -475,6 +499,7 @@ function hideSpinner() {
     const button = document.getElementById('send_button');
     button.innerHTML = 'Send';
     button.disabled = false; // Re-enable the button
+    spinnerVisible = false;
 }
 
 
