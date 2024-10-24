@@ -549,7 +549,7 @@ function textAreaDefaultBehaviourSet(textarea, defaultQuestion, placeholder){
 
 function insertExample(){
     const textarea = document.getElementById('chat-input');
-    const defaultQuestion="Descrivimi i doni froebelliani citando separatamente l'informazione da ciascun catalogo. Sii preciso ed esaustivo"
+    const defaultQuestion="Descrivimi l'Alfabetiere Carli citando separatamente l'informazione da ciascun catalogo. Sii preciso ed esaustivo. "
     textarea.value = defaultQuestion
 }
 

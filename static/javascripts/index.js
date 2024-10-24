@@ -23,7 +23,7 @@ function initChat() {
     }
     const textarea = document.getElementById('chat-input');
     if (textarea) {
-        const defaultQuestion = "Descrivimi i doni froebelliani citando separatamente \n      l'informazione da ciascun catalogo. Sii preciso ed esaustivo"
+        const defaultQuestion = "Descrivimi l'Alfabetiere Carli citando separatamente l'informazione da ciascun catalogo. \nSii preciso ed esaustivo. "
         const placeholder = `Inserisci una domanda molto precisa e circostanziata. Per esempio:\n     '${defaultQuestion}\n Se vuoi inserire questa domanda di esempio, usa la freccia a destra.`
         textAreaDefaultBehaviourSet(textarea, defaultQuestion, placeholder)
     }
@@ -179,7 +179,7 @@ function insertQuestion(question){
     let stringa = "";
     switch (question) {
         case "frobelliani":
-            stringa = "Descrivimi i doni froebelliani citando separatamente l'informazione da ciascun catalogo. Sii preciso ed esaustivo";
+            stringa = "Descrivimi l'Alfabetiere Carli citando separatamente l'informazione da ciascun catalogo. Sii preciso ed esaustivo. ";
             break;
         case "alfabetiere":
             stringa = "Descrivimi l'alfabetiere con particolare focus sugli inventori dei diversi oggetti. Cita separatamente l'informazione da ciascun catalogo. Sii preciso ed esaustivo"

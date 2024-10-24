@@ -23,7 +23,7 @@ function openPDFAtPage(pdfDoc, pageNum) {
     viewer.appendChild(canvas);
 
     // Render the page
-    const renderPage = num => {
+    const renderPage = (pdfDoc, num) => {
         pageIsRendering = true;
 
         // Get page
@@ -47,7 +47,7 @@ function openPDFAtPage(pdfDoc, pageNum) {
                 pageIsRendering = false;
 
                 if (pageNumPending !== null) {
-                    renderPage(pageNumPending);
+                    renderPage(pdfDoc, pageNumPending);
                     pageNumPending = null;
                 }
             });
@@ -62,14 +62,14 @@ function openPDFAtPage(pdfDoc, pageNum) {
         if (pageIsRendering) {
             pageNumPending = num;
         } else {
-            renderPage(num);
+            renderPage(pdfDoc, num);
         }
     };
 
     // Get Document
     pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-        renderPage(pageNum);
+        renderPage(pdfDoc, pageNum);
     });
 
     // Previous page
@@ -151,7 +151,7 @@ function OLDopenPDFAtPage(pdfDoc, pageNum) {
         if (pageIsRendering) {
             pageNumPending = num;
         } else {
-            renderPage(num);
+            renderPage(pdfDoc, num);
         }
     };
 
@@ -161,7 +161,7 @@ function OLDopenPDFAtPage(pdfDoc, pageNum) {
 
         // document.getElementById('page-count').textContent = pdfDoc.numPages;
 
-        renderPage(pageNum);
+        renderPage(pdfDoc, pageNum);
     });
 
 // Previous page
@@ -170,7 +170,7 @@ function OLDopenPDFAtPage(pdfDoc, pageNum) {
             return;
         }
         pageNum--;
-        queueRenderPage(pageNum);
+        queueRenderPage(pdfDoc, pageNum);
     });
 
 // Next page
@@ -179,7 +179,7 @@ function OLDopenPDFAtPage(pdfDoc, pageNum) {
             return;
         }
         pageNum++;
-        queueRenderPage(pageNum);
+        queueRenderPage(pdfDoc, pageNum);
     })
 }
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Dots</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;  /* White background */
+        }
+
+        .micro-dot {
+            position: absolute;
+            width: 3px;                 /* 3x3 pixel dots */
+            height: 3px;
+            border-radius: 50%;          /* Make the dot circular */
+            background-color: black;     /* Black dots */
+            animation: moveDot 3s linear forwards;  /* Move the dot for 3 seconds */
+        }
+
+        /* Define the movement of each dot */
+        @keyframes moveDot {
+            0% {
+                transform: translate(0, 0);  /* Start at the initial position */
+            }
+            100% {
+                transform: translate(50vw, 50vh);  /* Move to a new position */
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Function to create a random micro-dot
+        function createMicroDot() {
+            const dot = document.createElement('div');
+            dot.classList.add('micro-dot');
+
+            // Randomly position the dot anywhere on the screen
+            dot.style.left = Math.random() * 100 + 'vw';  // Random horizontal position
+            dot.style.top = Math.random() * 100 + 'vh';   // Random vertical position
+
+            // Randomize the movement (random direction)
+            const randomX = Math.random() * 100 - 50;  // Random X movement between -50vw and +50vw
+            const randomY = Math.random() * 100 - 50;  // Random Y movement between -50vh and +50vh
+            dot.style.transform = `translate(${randomX}vw, ${randomY}vh)`;  // Random movement
+
+            // Add the dot to the body
+            document.body.appendChild(dot);
+
+            // Make the dot disappear after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(dot);
+            }, 3000);  // 3000ms = 3 seconds
+        }
+
+        // Continuously create dozens of micro-dots at random positions
+        setInterval(() => {
+            for (let i = 0; i < 500; i++) {  // Add 10 dots at once
+                createMicroDot();
+            }
+        }, 300);  // Create new dots every 300ms
+    </script>
+</body>
+</html>
