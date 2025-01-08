@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Query the catalogues</h2>
+    Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per coprire
+    sia "cartella" che "cartelle"
+    <form id="queryForm">
+        <!-- Oggetto -->
+        <div class="mb-3">
+            <label for="oggetto" class="form-label">Oggetto</label>
+            <input type="text" class="form-control" id="oggetto" name="oggetto" placeholder="Enter Oggetto">
+        </div>
+
+        <!-- Descrizione -->
+        <div class="mb-3">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Enter Descrizione">
+        </div>
+
+        <!-- Premi o Raccomandazioni -->
+        <div class="mb-3">
+            <label for="premi_o_raccomandazioni" class="form-label">Premi o Raccomandazioni</label>
+            <input type="text" class="form-control" id="premi_o_raccomandazioni" name="premi_o_raccomandazioni"
+                   placeholder="Enter Premi o Raccomandazioni">
+        </div>
+
+        <!-- Pagina -->
+        <div class="mb-3">
+            <label for="pagina" class="form-label">Pagina</label>
+            <input type="number" class="form-control" id="pagina" name="pagina" placeholder="Enter Pagina">
+        </div>
+
+        <!-- Documento -->
+        <div class="mb-3">
+            <label for="documento" class="form-label">Documento</label>
+            <input type="text" class="form-control" id="documento" name="documento" placeholder="Enter Documento">
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-primary" onclick="submit_mongo_query()">Submit</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+    </form>
+    <div class="row mt-8">
+        <!-- Documents snippets  -->
+        <div class=" col-md-4 ">
+            <div id="results"></div>
+        </div>
+        <!-- PDF Viewer  -->
+        <div class="col-md-8  " id="limited_pdf_viewer_container" style="height: 100vh;">
+            <!-- PDF viewer content goes here -->
+            <div id="limited_pdf_viewer"></div>
+            <div id="controls">
+                <button id="prev-page">Previous Page</button>
+                <button id="next-page">Next Page</button>
+                <div style="display: none">Page: <span id="page-number"></span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

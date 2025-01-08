@@ -11,6 +11,7 @@ from flask import Flask, request, send_from_directory, jsonify, render_template,
 from flask import session
 from flask_session import Session
 from langserve import RemoteRunnable
+from pymongo import MongoClient
 
 import utils.scan_documents as scan_docs
 
@@ -28,9 +29,9 @@ PARENT_TEXT_FOLDER = 'documents/TextFiles'
 file_prefix = "temp_file"
 
 
-# Define custom escapejs filter
-# This filter is typically provided by Flask extensions like Flask-WTF or Flask-JSGlue, but if you don't have those installed, you can manually define a similar filter in your Flask application.
-# Let's define a custom escapejs filter in your Flask app to safely pass the JSON data to JavaScript.
+# Define custom escapejs filter This filter is typically provided by Flask extensions like Flask-WTF or Flask-JSGlue,
+# but if you don't have those installed, you can manually define a similar filter in your Flask application. Let's
+# define a custom escapejs filter in your Flask app to safely pass the JSON data to JavaScript.
 def escapejs(value):
     if isinstance(value, str):
         value = value.replace('\\', '\\\\').replace('\n', '\\n').replace('\r', '\\r')
@@ -91,6 +92,11 @@ def multiple_docs():
 @app.route('/one_doc')
 def one_doc():
     return render_template('catalogue_browsing.html')
+
+
+@app.route('/display_mongo_query')
+def display_mongo_query():
+    return render_template('query_mongo.html')
 
 
 @app.route('/about')
@@ -223,7 +229,7 @@ def stream_chat():
     generate_answer = session.get('generate_answer')
     if generate_answer is None:
         generate_answer = request.args.get('generate_answer')
-         # it is a JS string (e.g. 'false')  so convert it to boolean
+        # it is a JS string (e.g. 'false')  so convert it to boolean
     generate_answer = generate_answer.lower() == 'true'
 
     print("filter found:", filter)
@@ -416,6 +422,44 @@ def get_session(session_id):
         'response': session_data.get(b'response', b'').decode('utf-8'),
         'note': session_data.get(b'note', b'').decode('utf-8')
     }), 200
+
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client['oggetti_didattici']  # Replace with your database name
+collection = db['oggetti_didattici']  # Replace with your collection name
+
+
+@app.route('/query_mongo', methods=['POST'])
+# Flask route with updated MongoDB query
+def query_mongo():
+    try:
+        # Parse incoming JSON request
+        data = request.json
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+
+        # Construct MongoDB query with substring matching and case insensitivity
+        query = {
+            key: {"$regex": value, "$options": "i"}
+            for key, value in data.items() if value
+        }
+
+        # Query the collection
+        results = collection.find(query)
+
+        # Format results as a list of dictionaries
+        formatted_results = []
+        for result in results:
+            result['_id'] = str(result['_id'])  # Convert ObjectId to string
+            formatted_results.append(result)
+
+        # Return the results
+        return jsonify({"results": formatted_results}), 200
+
+    except Exception as e:
+        # Handle errors
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':
