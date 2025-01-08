@@ -425,7 +425,7 @@ def get_session(session_id):
 
 
 # Connect to MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://admin:password@localhost:27019/?authSource=admin")
 db = client['oggetti_didattici']  # Replace with your database name
 collection = db['oggetti_didattici']  # Replace with your collection name
 
@@ -446,6 +446,7 @@ def query_mongo():
         }
 
         # Query the collection
+        print(query)
         results = collection.find(query)
 
         # Format results as a list of dictionaries
@@ -454,6 +455,7 @@ def query_mongo():
             result['_id'] = str(result['_id'])  # Convert ObjectId to string
             formatted_results.append(result)
 
+        print(formatted_results)
         # Return the results
         return jsonify({"results": formatted_results}), 200
 

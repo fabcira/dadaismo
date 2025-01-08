@@ -1,0 +1,1 @@
+python app.py >> logging/log.txt 2>&1 &
