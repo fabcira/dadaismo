@@ -1,113 +1,158 @@
-<div class="container mt-5">
-    <h2 class="mb-4">Query the catalogues</h2>
-    <p> Ci sono due modi di interrogare l'archivio. 
-        La prima è ricerca del testo nei records dei cataloghi. 
-        La seconda è la ricerca nei diversi campi</p>
+<!-- Nav Tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active red-tab" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button"
+                role="tab" aria-controls="tab1" aria-selected="true">
+            Ricerca nel Testo
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link red-tab" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
+                role="tab" aria-controls="tab2" aria-selected="false">
+            Ricerca nei Campi
+        </button>
+    </li>
+</ul>
 
-    <h2> Ricerca del testo nei records</h2>
-    Qui si possono cercare parole nelle descrizioni indipendentemente dal  campo del record
-    in cui si trovano<span 
-    class="glyphicon glyphicon-info-sign text-info" 
-    style="cursor: pointer;" 
-    data-toggle="modal" 
-    data-target="#infoModal">. 
-    <form id="free_queryForm">
-        <div class="mb-3">
-            <label for="free_text" class="form-label">Cerca</label>
-            <input type="text" class="form-control" id="free_text" name="free_text" placeholder="Enter Oggetto">
-        </div>
-        <div class="d-flex justify-content-between">
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <button type="button" class="btn btn-primary" onclick="submit_free_mongo_query()">Cerca</button>
-            
-        </div>
-    </form>
+<!-- Tab Content -->
+<div class="tab-content mt-3" id="myTabContent">
+    <!-- Tab 1 -->
+    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+        <h2>Ricerca nel testo nei records</h2>
+        <p>Qui si possono cercare parole nelle descrizioni indipendentemente dal campo del record in cui si trovano
+            <span
+                    class="bi bi-info-circle bg-brown-white"
+                    style="cursor: pointer;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#infoModal">
+            </span>
 
+        </p>
+        <form id="free_queryForm">
 
-    <h2> Ricerca nei campi dei records</h2>
-        <p>Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per coprire
-    sia "cartella" che "cartelle" <p>
-        
-    <form id="queryForm">
-        <!-- Oggetto -->
-        <div class="mb-3">
-            <label for="oggetto" class="form-label">Nome dell'Oggetto Didattico</label>
-            <input type="text" class="form-control" id="oggetto" name="oggetto" placeholder="Enter Oggetto">
-        </div>
-
-        <!-- Descrizione -->
-        <div class="mb-3">
-            <label for="descrizione" class="form-label">Testo Descrittivo</label>
-            <input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Enter Descrizione">
-        </div>
-
-        <!-- Premi o Raccomandazioni -->
-        <div class="mb-3">
-            <label for="premi_o_raccomandazioni" class="form-label">Premi o Raccomandazioni</label>
-            <input type="text" class="form-control" id="premi_o_raccomandazioni" name="premi_o_raccomandazioni"
-                   placeholder="Enter Premi o Raccomandazioni">
-        </div>
-
-        <!-- Pagina -->
-        <div class="mb-3">
-            <label for="pagina" class="form-label">Pagina</label>
-            <input type="number" class="form-control" id="pagina" name="pagina" placeholder="Enter Pagina">
-        </div>
-
-        <!-- Documento -->
-        <div class="mb-3">
-            <label for="documento" class="form-label">Documento</label>
-            <select class="form-control" id="documento" name="documento">
-                <option value="">Seleziona Documento</option>
-            </select>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-between">
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <button type="button" class="btn btn-primary" onclick="submit_mongo_query()">Cerca</button>
-            
-        </div>
-    </form>
-    <div class="row mt-5">
-        <!-- Documents snippets  -->
-        <div class=" col-md-4 ">
-            <div id="results"></div>
-        </div>
-        <!-- PDF Viewer  -->
-        <div class="col-md-8  " id="limited_pdf_viewer_container" style="height: 100vh;">
-            <!-- PDF viewer content goes here -->
-            <div id="limited_pdf_viewer"></div>
-            <div id="controls">
-                <button id="prev-page">Previous Page</button>
-                <button id="next-page">Next Page</button>
-                <div style="display: none">Page: <span id="page-number"></span></div>
+            <div class="row mb-3 align-items-center">
+                <label for="free_text" class="col-sm-1 col-form-label">Cerca</label>
+                <div class="col-sm-11   ">
+                    <input type="text" class="form-control" id="free_text" name="free_text"
+                       placeholder="cerca parole anche usando AND, OR  e parentesi">
+                </div>
             </div>
-        </div>
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="button" class="btn btn-primary" onclick="submit_free_mongo_query()">Cerca</button>
+            </div>
+        </form>
     </div>
 
+    <!-- Tab 2 -->
+    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+        <h2>Ricerca nei campi dei records</h2>
+        <p>Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per
+            coprire sia "cartella" che "cartelle".
+        </p>
+        <form id="queryForm">
+            <!-- Oggetto -->
+            <div class="row mb-3 align-items-center">
+                <label for="oggetto" class="col-sm-2 col-form-label">Nome dell'Oggetto Didattico</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="oggetto" name="oggetto"
+                           placeholder="Descrizione Oggetto">
+                </div>
+            </div>
+
+            <!-- Descrizione -->
+            <div class="row mb-3 align-items-center">
+                <label for="descrizione" class="col-sm-2 col-form-label">Testo Descrittivo</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="descrizione" name="descrizione"
+                           placeholder="Descrizione Descrizione">
+                </div>
+            </div>
+
+            <!-- Premi o Raccomandazioni -->
+            <div class="row mb-3 align-items-center">
+                <label for="premi_o_raccomandazioni" class="col-sm-2 col-form-label">Premi o Raccomandazioni</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="premi_o_raccomandazioni" name="premi_o_raccomandazioni"
+                           placeholder="Descrizione Premi o Raccomandazioni">
+                </div>
+            </div>
+
+            <!-- Pagina -->
+            <div class="row mb-3 align-items-center">
+                <label for="pagina" class="col-sm-2 col-form-label">Pagina</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="pagina" name="pagina" placeholder="Enter Pagina">
+                </div>
+            </div>
+
+            <!-- Documento -->
+            <div class="row mb-3 align-items-center">
+                <label for="documento" class="col-sm-2 col-form-label">Documento</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="documento" name="documento">
+                        <option value="">Seleziona Documento</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="button" class="btn btn-primary" onclick="submit_mongo_query()">Cerca</button>
+            </div>
+        </form>
+
+    </div>
 </div>
+<div class="row mt-5">
+    <!-- Documents snippets  -->
+    <div class=" col-md-4 ">
+        <h2>Risultati della Ricerca</h2>
+        <div style="height: 100vh; border: 1px solid black;" id="results"></div>
+    </div>
+    <!-- PDF Viewer  -->
+    <div class="col-md-8  " id="limited_pdf_viewer_container" style="height: 100vh;">
+        <h2>Documento Visualizzato</h2>
 
-
+        <!-- PDF viewer content goes here -->
+        <div id="limited_pdf_viewer"></div>
+        <div id="controls">
+            <button id="prev-page">Previous Page</button>
+            <button id="next-page">Next Page</button>
+            <div style="display: none">Page: <span id="page-number"></span></div>
+        </div>
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title" id="infoModalLabel">Modal Title</h4>
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="infoModalLabel">Modal Title</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                Inserire una serie di parole chiave per cercare in tutti i campi. <br/><br/>
+                Per esempio <em>alfabetiere</em>. Questo verrà cercato in tutti i campi.<br/>
+                <br/>
+                Se si inseriscono più parole come per esempio <br/><em>alfabetiere carli,</em><br/>
+                verranno ritornati tutti i records che contengono alfabetiere oppure carli.<br/>
+                <br/>
+                Se si vogliono i records con entrambe le parole, occorre scrivere <br/><em>alfabetiere AND carli</em>
+                <br/>(notare che <em>AND</em> va scritto in maiuscolo).<br/>
+
+                <br/>Se si vogliono fare domande più complesse come per esempio <br/><em>dammi tutti i records che
+                contengono Med. o Medaglia di Bronzo</em><br/>
+                si possono usare parentesi e connotazioni di AND e OR.<br/>
+                Per esempio: <br/><em>(Med. OR Medaglia) AND Bronzo</em>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
         </div>
-        <!-- Modal Body -->
-        <div class="modal-body">
-          This is the text content of the modal. You can provide any additional details or information here.
-        </div>
-        <!-- Modal Footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

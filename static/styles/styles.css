@@ -90,15 +90,16 @@ html, body {
 }
 
 .btn-outline-custom {
-            color: rgb(110, 72, 48);
-            border: 1px solid rgb(110, 72, 48);
-            background-color: transparent;
-        }
+    color: rgb(110, 72, 48);
+    border: 1px solid rgb(110, 72, 48);
+    background-color: transparent;
+}
 
-        .btn-outline-custom:hover {
-            color: white;
-            background-color: rgb(110, 72, 48);
-        }
+.btn-outline-custom:hover {
+    color: white;
+    background-color: rgb(110, 72, 48);
+}
+
 .link_button {
     color: rgb(110, 72, 48);;
     text-decoration: underline;
@@ -283,10 +284,58 @@ a:active {
 }
 
 .no-border {
-            border: none !important;
-        }
+    border: none !important;
+}
 
 .dark_row {
     background-color: rgb(110, 72, 48);
     color: white;
 }
+
+
+/* General tab styles (both active and inactive) */
+.red-tab {
+    background-color: darkred !important; /* Inactive and active tab background */
+    color: white !important; /* Ensure text is visible */
+    border: 1px solid rgb(204, 102, 51) !important; /* Match border to background */
+}
+
+/* Hover effect for all tabs */
+.red-tab:hover {
+    background-color: black !important; /* Darken on hover */
+    color: white !important; /* Ensure text visibility */
+}
+
+/* Specific styling for active tab */
+.red-tab.active {
+    background-color: rgb(153, 51, 17) !important; /* Consistent active tab color */
+    color: white !important; /* Ensure text visibility */
+    border-color: rgb(153, 51, 17) !important; /* Match active tab border */
+}
+
+/* Specific styling for inactive tabs */
+.nav-tabs .nav-link:not(.active) {
+    background-color: lightgrey !important; /* Match inactive tab background */
+    color: black !important; /* Ensure text is visible */
+}
+
+label {
+    font-weight: bold;
+}
+
+ .text-brown {
+        color: brown !important; /* Override default styles */
+    }
+
+ .bg-brown-white {
+        background-color: brown; /* Brown background */
+        color: white; /* White text */
+        border-radius: 50%; /* Optional: Circle shape */
+        padding: 5px; /* Optional: Add spacing */
+        display: inline-block; /* Ensure the background fits the icon */
+    }
+
+ .custom-navbar {
+        padding-left: 8px; !important;
+        padding-right: 8px;!important;
+    }

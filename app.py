@@ -436,7 +436,14 @@ mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 db = client['oggetti_didattici']  # Replace with your database name
 collection = db['oggetti_didattici']  # Replace with your collection name
+# Create a text index on the specified fields
+collection.create_index([
+    ("oggetto", "text"),
+    ("descrizione", "text"),
+    ("premi_o_raccomandazioni", "text")
+])
 
+import utils.regexp_parser as regexpp
 
 @app.route('/query_mongo', methods=['POST'])
 # Flask route with updated MongoDB query
@@ -478,12 +485,13 @@ def text_search():
         # Get the search query from the request JSON body
         query_data = request.json
         search_string = query_data.get("search_string", "")
-        
+
         if not search_string:
             return jsonify({"error": "Missing search string"}), 400
 
+        search_string = regexpp.parse_expression(search_string)
         # Perform the text search
-        results = collection.find({"$text": {"$search": search_string}})
+        results = collection.find(search_string)
 
         # Convert the cursor to a list of documents
         documents = list(results)

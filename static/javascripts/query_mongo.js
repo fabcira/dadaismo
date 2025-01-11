@@ -1,7 +1,7 @@
 /**
  * if the filename does not have a ".pdf" extension, it adds it
  * @param {*} filename
- * @returns teh modified filename
+ * @returns the modified filename
  */
 function ensurePDFExtension(filename) {
   // Check if the string ends with ".pdf" (case-insensitive)
@@ -54,7 +54,7 @@ async function fetchPdfs_for_mongo() {
 function writeResults(results) {
   // Handle and display the results
   const resultsContainer = document.getElementById("results");
-  const results = response.data.results;
+  results = results.data.results;
 
   if (results && results.length > 0) {
     // Clear the results container
