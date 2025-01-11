@@ -464,5 +464,31 @@ def query_mongo():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route('/free_query_mongo', methods=['POST'])
+def text_search():
+    try:
+        # Get the search query from the request JSON body
+        query_data = request.json
+        search_string = query_data.get("search_string", "")
+        
+        if not search_string:
+            return jsonify({"error": "Missing search string"}), 400
+
+        # Perform the text search
+        results = collection.find({"$text": {"$search": search_string}})
+
+        # Convert the cursor to a list of documents
+        documents = list(results)
+
+        # Remove MongoDB ObjectId from the response for JSON serialization
+        for doc in documents:
+            doc["_id"] = str(doc["_id"])
+
+        return jsonify({"results": documents}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=False, port=5055)

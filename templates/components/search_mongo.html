@@ -1,17 +1,43 @@
 <div class="container mt-5">
     <h2 class="mb-4">Query the catalogues</h2>
-    Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per coprire
-    sia "cartella" che "cartelle"
+    <p> Ci sono due modi di interrogare l'archivio. 
+        La prima è ricerca del testo nei records dei cataloghi. 
+        La seconda è la ricerca nei diversi campi</p>
+
+    <h2> Ricerca del testo nei records</h2>
+    Qui si possono cercare parole nelle descrizioni indipendentemente dal  campo del record
+    in cui si trovano<span 
+    class="glyphicon glyphicon-info-sign text-info" 
+    style="cursor: pointer;" 
+    data-toggle="modal" 
+    data-target="#infoModal">. 
+    <form id="free_queryForm">
+        <div class="mb-3">
+            <label for="free_text" class="form-label">Cerca</label>
+            <input type="text" class="form-control" id="free_text" name="free_text" placeholder="Enter Oggetto">
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button" class="btn btn-primary" onclick="submit_free_mongo_query()">Cerca</button>
+            
+        </div>
+    </form>
+
+
+    <h2> Ricerca nei campi dei records</h2>
+        <p>Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per coprire
+    sia "cartella" che "cartelle" <p>
+        
     <form id="queryForm">
         <!-- Oggetto -->
         <div class="mb-3">
-            <label for="oggetto" class="form-label">Oggetto</label>
+            <label for="oggetto" class="form-label">Nome dell'Oggetto Didattico</label>
             <input type="text" class="form-control" id="oggetto" name="oggetto" placeholder="Enter Oggetto">
         </div>
 
         <!-- Descrizione -->
         <div class="mb-3">
-            <label for="descrizione" class="form-label">Descrizione</label>
+            <label for="descrizione" class="form-label">Testo Descrittivo</label>
             <input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Enter Descrizione">
         </div>
 
@@ -31,16 +57,19 @@
         <!-- Documento -->
         <div class="mb-3">
             <label for="documento" class="form-label">Documento</label>
-            <input type="text" class="form-control" id="documento" name="documento" placeholder="Enter Documento">
+            <select class="form-control" id="documento" name="documento">
+                <option value="">Seleziona Documento</option>
+            </select>
         </div>
 
         <!-- Buttons -->
         <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-primary" onclick="submit_mongo_query()">Submit</button>
             <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button" class="btn btn-primary" onclick="submit_mongo_query()">Cerca</button>
+            
         </div>
     </form>
-    <div class="row mt-8">
+    <div class="row mt-5">
         <!-- Documents snippets  -->
         <div class=" col-md-4 ">
             <div id="results"></div>
@@ -59,3 +88,26 @@
 
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="infoModalLabel">Modal Title</h4>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+          This is the text content of the modal. You can provide any additional details or information here.
+        </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

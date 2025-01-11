@@ -24,8 +24,8 @@
     <script src="{{ url_for('static', filename='javascripts/pdf_viewer.js') }}"></script>
 
 </head>
-<body>
-{% include 'components/navbar.html' %}
+<body onload="fetchPdfs_for_mongo()">
+    {% include 'components/navbar.html' %}
 
 <div class="container-fluid d-flex flex-column align-items-center justify-content-center p-0 mt-2" id="main-container">
     {# Querying mongo #}
