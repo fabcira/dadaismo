@@ -7,6 +7,7 @@ import uuid
 
 import redis
 from PyPDF2 import PdfReader, PdfWriter
+from dotenv import load_dotenv
 from flask import Flask, request, send_from_directory, jsonify, render_template, Response
 from flask import session
 from flask_session import Session
@@ -27,6 +28,9 @@ PDF_TEMP_FOLDER = 'documents/TempPDFs'
 PARENT_TEXT_FOLDER = 'documents/TextFiles'
 
 file_prefix = "temp_file"
+
+# Load environment variables from the .env file
+load_dotenv()
 
 
 # Define custom escapejs filter This filter is typically provided by Flask extensions like Flask-WTF or Flask-JSGlue,
@@ -425,7 +429,11 @@ def get_session(session_id):
 
 
 # Connect to MongoDB
-client = MongoClient("mongodb://admin:password@localhost:27019/?authSource=admin")
+
+# Retrieve the MongoDB URI from the environment
+mongo_uri = os.getenv("MONGO_URI")
+
+client = MongoClient(mongo_uri)
 db = client['oggetti_didattici']  # Replace with your database name
 collection = db['oggetti_didattici']  # Replace with your collection name
 
