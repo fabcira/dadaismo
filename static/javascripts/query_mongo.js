@@ -30,6 +30,11 @@ async function fetchPdfs_for_mongo() {
   placeholderOption.selected = true;
   documentoSelect.appendChild(placeholderOption);
 
+  const option = document.createElement("option");
+    option.value = '';
+    option.innerText = "Tutti I documenti";
+    documentoSelect.value = "Tutti I documenti"
+    documentoSelect.appendChild(option);
   // Populate the select field with PDF options
   pdfs.forEach((pdf) => {
     const option = document.createElement("option");

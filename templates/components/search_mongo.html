@@ -1,51 +1,25 @@
 <!-- Nav Tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active red-tab" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button"
-                role="tab" aria-controls="tab1" aria-selected="true">
-            Ricerca nel Testo
-        </button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link red-tab" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
+        <button class="nav-link active red-tab" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
                 role="tab" aria-controls="tab2" aria-selected="false">
             Ricerca nei Campi
         </button>
     </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link red-tab" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button"
+                role="tab" aria-controls="tab1" aria-selected="true">
+            Ricerca nel Testo
+        </button>
+    </li>
+
 </ul>
 
 <!-- Tab Content -->
 <div class="tab-content mt-3" id="myTabContent">
-    <!-- Tab 1 -->
-    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-        <h2>Ricerca nel testo nei records</h2>
-        <p>Qui si possono cercare parole nelle descrizioni indipendentemente dal campo del record in cui si trovano
-            <span
-                    class="bi bi-info-circle bg-brown-white"
-                    style="cursor: pointer;"
-                    data-bs-toggle="modal"
-                    data-bs-target="#infoModal">
-            </span>
-
-        </p>
-        <form id="free_queryForm">
-
-            <div class="row mb-3 align-items-center">
-                <label for="free_text" class="col-sm-1 col-form-label">Cerca</label>
-                <div class="col-sm-11   ">
-                    <input type="text" class="form-control" id="free_text" name="free_text"
-                       placeholder="cerca parole anche usando AND, OR  e parentesi">
-                </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <button type="reset" class="btn btn-secondary">Reset</button>
-                <button type="button" class="btn btn-primary" onclick="submit_free_mongo_query()">Cerca</button>
-            </div>
-        </form>
-    </div>
 
     <!-- Tab 2 -->
-    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+    <div class="tab-pane show active fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
         <h2>Ricerca nei campi dei records</h2>
         <p>Suggeriamo di usare forme abbreviate delle parole senza desinenze, se possibile, per esempio "cartell" per
             coprire sia "cartella" che "cartelle".
@@ -104,6 +78,34 @@
         </form>
 
     </div>
+    <!-- Tab 1 -->
+    <div class="tab-pane fade " id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+        <h2>Ricerca nel testo nei records</h2>
+        <p>Qui si possono cercare parole nelle descrizioni indipendentemente dal campo del record in cui si trovano
+            <span
+                    class="bi bi-info-circle bg-brown-white"
+                    style="cursor: pointer;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#infoModal">
+            </span>
+
+        </p>
+        <form id="free_queryForm">
+
+            <div class="row mb-3 align-items-center">
+                <label for="free_text" class="col-sm-1 col-form-label">Cerca</label>
+                <div class="col-sm-11   ">
+                    <input type="text" class="form-control" id="free_text" name="free_text"
+                       placeholder="cerca parole anche usando AND, OR  e parentesi">
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="button" class="btn btn-primary" onclick="submit_free_mongo_query()">Cerca</button>
+            </div>
+        </form>
+    </div>
+
 </div>
 <div class="row mt-5">
     <!-- Documents snippets  -->
